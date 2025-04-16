@@ -37,22 +37,29 @@ func add_player(id, new_player_name):
 
 
 func kill_player(id):
+	id = int(id) # Ensure consistent type
+
 	print("players", playing_players)
 	print("killing player", id)
+
+	if id in player_labels:
+		print("true 1")
+		player_labels[id].label.hide()
+		
 	if id in playing_players:
+		print("true 2")
 		playing_players.erase(id)
 
-	# Hide player label but don't remove their score info
-	if id in player_labels:
-		player_labels[id].label.hide()
+	print("players", playing_players)
 
-	# Check for a winner (only 1 player left)
 	if playing_players.size() <= 1:
+		print("true 3")
 		check_for_winner()
 
 
+
 func check_for_winner():
-	if playing_players.size() == 1:
+	if playing_players.size() <= 1 && playing_players.size() >0:
 		var winner_id = playing_players[0]
 		if winner_id in player_labels:
 			var winner_name = player_labels[winner_id].name
