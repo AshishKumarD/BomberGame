@@ -12,7 +12,16 @@ func _ready():
 func _process(_delta):
 	var rocks_left = $"../Rocks".get_child_count()
 	if rocks_left == 0:
-		check_for_winner()
+		var winner_name = ""
+		var winner_score = 0
+		for p in player_labels:
+			if player_labels[p].score > winner_score:
+				winner_score = player_labels[p].score
+				winner_name = player_labels[p].name
+
+		$"../Winner".set_text("THE WINNER IS:\n" + winner_name)
+		$"../Winner".show()
+		
 
 
 func increase_score(for_who):
