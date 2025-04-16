@@ -33,7 +33,7 @@ func add_player(id, new_player_name):
 	add_child(l)
 
 	player_labels[id] = { name = new_player_name, label = l, score = 0 }
-	playing_players.append(player_labels[id].name)
+	playing_players.append(id)
 
 
 func kill_player(id):
