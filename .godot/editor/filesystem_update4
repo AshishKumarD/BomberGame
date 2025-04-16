@@ -1,12 +1,12 @@
 res://lobby.tscn
 res://tileset.tres
+res://gamestate.gd
 res://bomb.tscn
 res://world.tscn
 res://rock.tscn
 res://tile_scene.tscn
 res://player.tscn
-res://world.gd
-res://rocks.gd
 res://score.gd
-res://gamestate.gd
+res://bomb.gd
 res://player.gd
+res://rock.gd

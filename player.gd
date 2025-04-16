@@ -68,9 +68,9 @@ func set_player_name(value):
 
 
 @rpc("call_local")
-func exploded(_by_who):
+func exploded(_by_who, vicitim):
 	if stunned:
 		return
 	stunned = true
 	get_node("anim").play("stunned")
-	gamestate.kill_player(multiplayer.get_unique_id())
+	gamestate.kill_player(vicitim)

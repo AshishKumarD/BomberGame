@@ -37,7 +37,8 @@ func add_player(id, new_player_name):
 
 
 func kill_player(id):
-	print("killing player")
+	print("players", playing_players)
+	print("killing player", id)
 	if id in playing_players:
 		playing_players.erase(id)
 
@@ -46,7 +47,6 @@ func kill_player(id):
 		player_labels[id].label.hide()
 
 	# Check for a winner (only 1 player left)
-	print(playing_players)
 	if playing_players.size() <= 1:
 		check_for_winner()
 
