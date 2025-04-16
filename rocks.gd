@@ -44,18 +44,19 @@ func _ready():
 		var rock_names_to_disable := []
 
 		for i in range(number_to_disable):
-			rock_names_to_disable.append(rocks[i])
+			rock_names_to_disable.append(rocks[i].name)
 
 		# Call the RPC on all clients including self
 		print("disable")
 		rpc("disable_rocks_rpc", rock_names_to_disable)
 
 @rpc("any_peer","call_local")
-func disable_rocks_rpc(rocks: Array) -> void:
-	print("disabling rocks")
-	for i in range(rocks.size()):
-		var rock = rocks[i]
-		_disable_rock(rock)
+func disable_rocks_rpc(rock_names: Array) -> void:
+	for rock_name in rock_names:
+		var node = get_node(NodePath(rock_name))
+		print(node)
+		if node:
+			_disable_rock(node)
 
 func _disable_rock(rock: CharacterBody2D) -> void:
 	rock.visible = false
