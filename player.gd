@@ -73,3 +73,4 @@ func exploded(_by_who):
 		return
 	stunned = true
 	get_node("anim").play("stunned")
+	gamestate.kill_player(multiplayer.get_unique_id())

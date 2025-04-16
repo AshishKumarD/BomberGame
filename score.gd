@@ -1,19 +1,18 @@
 extends HBoxContainer
 
 var player_labels = {}
+var playing_players = []
+
+
+func _ready():
+	$"../Winner".hide()
+	set_process(true)
+
 
 func _process(_delta):
 	var rocks_left = $"../Rocks".get_child_count()
 	if rocks_left == 0:
-		var winner_name = ""
-		var winner_score = 0
-		for p in player_labels:
-			if player_labels[p].score > winner_score:
-				winner_score = player_labels[p].score
-				winner_name = player_labels[p].name
-
-		$"../Winner".set_text("THE WINNER IS:\n" + winner_name)
-		$"../Winner".show()
+		check_for_winner()
 
 
 func increase_score(for_who):
@@ -34,11 +33,34 @@ func add_player(id, new_player_name):
 	add_child(l)
 
 	player_labels[id] = { name = new_player_name, label = l, score = 0 }
+	playing_players.append(id)
 
 
-func _ready():
-	$"../Winner".hide()
-	set_process(true)
+func kill_player(id):
+	print("killing player")
+	if id in playing_players:
+		playing_players.erase(id)
+
+	# Hide player label but don't remove their score info
+	if id in player_labels:
+		player_labels[id].label.hide()
+
+	# Check for a winner (only 1 player left)
+	print(playing_players)
+	if playing_players.size() <= 1:
+		check_for_winner()
+
+
+func check_for_winner():
+	if playing_players.size() == 1:
+		var winner_id = playing_players[0]
+		if winner_id in player_labels:
+			var winner_name = player_labels[winner_id].name
+			$"../Winner".set_text("THE WINNER IS:\n" + winner_name)
+			$"../Winner".show()
+	elif playing_players.size() == 0:
+		$"../Winner".set_text("NO ONE WINS :(")
+		$"../Winner".show()
 
 
 func _on_exit_game_pressed():

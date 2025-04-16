@@ -17,6 +17,8 @@ var player_name = "The Warrior"
 var players = {}
 var players_ready = []
 
+var playing_players = []
+
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
@@ -139,6 +141,11 @@ func end_game():
 
 	game_ended.emit()
 	players.clear()
+	
+func kill_player(id):
+	var world = get_tree().get_root().get_node("World")
+	world.get_node("Score").kill_player(multiplayer.get_unique_id())
+
 
 
 func _ready():

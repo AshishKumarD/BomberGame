@@ -52,9 +52,10 @@ func _ready():
 
 @rpc("any_peer","call_local")
 func disable_rocks_rpc(rock_names: Array) -> void:
+	print(rock_names.size())
 	for rock_name in rock_names:
 		var node = get_node(NodePath(rock_name))
-		print(node)
+		
 		if node:
 			_disable_rock(node)
 
@@ -64,6 +65,7 @@ func _disable_rock(rock: CharacterBody2D) -> void:
 	rock.set_process(false)
 	rock.set_collision_layer(0)
 	rock.set_collision_mask(0)
+	rock.queue_free()
 
 	for child in rock.get_children():
 		if child is CollisionShape2D:

@@ -7,3 +7,6 @@ res://tile_scene.tscn
 res://player.tscn
 res://world.gd
 res://rocks.gd
+res://score.gd
+res://gamestate.gd
+res://player.gd
