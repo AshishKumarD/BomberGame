@@ -73,4 +73,5 @@ func exploded(_by_who, vicitim):
 		return
 	stunned = true
 	get_node("anim").play("stunned")
+	print("going to die", vicitim)
 	gamestate.kill_player(vicitim)

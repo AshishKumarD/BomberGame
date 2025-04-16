@@ -17,7 +17,7 @@ func explode():
 			var result: Dictionary  = world_state.intersect_ray(query)
 			if not result.collider is TileMap:
 				# Exploded can only be called by the authority, but will also be called locally.
-				print("Bomb exploading", multiplayer.get_unique_id())
+				print("Bomb exploading", p.name)
 				p.exploded.rpc(from_player, p.name)
 
 
