@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dviwgv2ty8v6u"]
+[gd_scene load_steps=18 format=3 uid="uid://dviwgv2ty8v6u"]
 
 [ext_resource type="Script" uid="uid://w2s7fcduh6lh" path="res://player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bsqovikudjr0q" path="res://charwalk.png" id="2"]
 [ext_resource type="FontFile" uid="uid://knb8u535cfkw" path="res://montserrat.otf" id="3"]
 [ext_resource type="Script" uid="uid://h1sr1twq1myg" path="res://player_controls.gd" id="4_k1vfr"]
+[ext_resource type="AudioStream" uid="uid://cicql3uoyj37e" path="res://audio/ouch.mp3" id="5_sweqy"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 20.0
@@ -63,6 +64,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-6.28319, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="4"]
@@ -132,8 +145,24 @@ tracks/0/keys = {
 "values": [2, 6, 10, 14]
 }
 
+[sub_resource type="Animation" id="Animation_2hs0m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yb83i"]
 _data = {
+&"RESET": SubResource("Animation_2hs0m"),
 &"standing": SubResource("2"),
 &"stunned": SubResource("3"),
 &"walk_down": SubResource("4"),
@@ -169,7 +198,6 @@ script = ExtResource("1")
 
 [node name="sprite" type="Sprite2D" parent="."]
 position = Vector2(0.0750351, 6.23615)
-rotation = -6.28319
 texture = ExtResource("2")
 offset = Vector2(-0.0750351, -6.23615)
 hframes = 4
@@ -180,7 +208,7 @@ shape = SubResource("1")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_yb83i")
+&"": SubResource("AnimationLibrary_yb83i")
 }
 
 [node name="label" type="Label" parent="."]
@@ -204,3 +232,7 @@ script = ExtResource("4_k1vfr")
 
 [node name="InputsSync" type="MultiplayerSynchronizer" parent="Inputs"]
 replication_config = SubResource("SceneReplicationConfig_w53uu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_sweqy")
+volume_db = 5.0

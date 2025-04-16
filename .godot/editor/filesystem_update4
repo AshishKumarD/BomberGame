@@ -2,3 +2,8 @@ res://lobby.tscn
 res://tileset.tres
 res://bomb.tscn
 res://world.tscn
+res://rock.tscn
+res://tile_scene.tscn
+res://player.tscn
+res://world.gd
+res://rocks.gd
