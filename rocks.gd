@@ -40,22 +40,23 @@ func _ready():
 				rocks.append(child)
 		
 		rocks.shuffle()
-		var number_to_disable := int(rocks.size() * 0.2)
+		var number_to_disable := int(rocks.size() * 0.5)
 		var rock_names_to_disable := []
 
 		for i in range(number_to_disable):
-			rock_names_to_disable.append(rocks[i].name)
+			rock_names_to_disable.append(rocks[i])
 
 		# Call the RPC on all clients including self
+		print("disable")
 		rpc("disable_rocks_rpc", rock_names_to_disable)
+		disable_rocks_rpc(rock_names_to_disable)
 
 @rpc("any_peer")
-func disable_rocks_rpc(rock_names: Array) -> void:
+func disable_rocks_rpc(rocks: Array) -> void:
 	print("disabling rocks")
-	for rock_name in rock_names:
-		var rock = get_node_or_null(rock_name)
-		if rock:
-			_disable_rock(rock)
+	for i in range(rocks.size()):
+		var rock = rocks[i]
+		_disable_rock(rock)
 
 func _disable_rock(rock: CharacterBody2D) -> void:
 	rock.visible = false
