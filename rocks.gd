@@ -49,9 +49,8 @@ func _ready():
 		# Call the RPC on all clients including self
 		print("disable")
 		rpc("disable_rocks_rpc", rock_names_to_disable)
-		disable_rocks_rpc(rock_names_to_disable)
 
-@rpc("any_peer")
+@rpc("any_peer","call_local")
 func disable_rocks_rpc(rocks: Array) -> void:
 	print("disabling rocks")
 	for i in range(rocks.size()):
