@@ -52,14 +52,14 @@ func kill_player(id):
 
 	print("players", playing_players)
 
-	if playing_players.size() <= 1:
+	if playing_players.size() <= 1 && playing_players.size() >0:
 		print("true 3")
 		check_for_winner()
 
 
 
 func check_for_winner():
-	if playing_players.size() <= 1 && playing_players.size() >0:
+	if playing_players.size() >= 1:
 		var winner_id = playing_players[0]
 		if winner_id in player_labels:
 			var winner_name = player_labels[winner_id].name
