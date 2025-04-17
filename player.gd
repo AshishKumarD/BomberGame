@@ -13,6 +13,7 @@ var stunned = false
 var inputs = $Inputs
 var last_bomb_time = BOMB_RATE
 var current_anim = ""
+@onready var bomb_place: AudioStreamPlayer2D = $BombPlace
 
 func _ready():
 	stunned = false
@@ -34,6 +35,8 @@ func _physics_process(delta):
 		if not stunned and is_multiplayer_authority() and inputs.bombing and last_bomb_time >= BOMB_RATE:
 			last_bomb_time = 0.0
 			get_node("../../BombSpawner").spawn([position, str(name).to_int()])
+			bomb_place.play()
+			
 	else:
 		# The client simply updates the position to the last known one.
 		position = synced_position
@@ -46,7 +49,7 @@ func _physics_process(delta):
 	# Also update the animation based on the last known player input state
 	var new_anim = "standing"
 
-	if inputs.motion.y < 0:
+	if inputs.motion.x < 0:
 		new_anim = "walk_up"
 	elif inputs.motion.y > 0:
 		new_anim = "walk_down"

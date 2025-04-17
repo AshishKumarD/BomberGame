@@ -1,8 +1,7 @@
-res://lobby.tscn
+res://player.tscn
 res://tileset.tres
+res://lobby.tscn
 res://bomb.tscn
 res://world.tscn
 res://rock.tscn
 res://tile_scene.tscn
-res://player.tscn
-res://score.gd

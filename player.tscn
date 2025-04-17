@@ -1,10 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://dviwgv2ty8v6u"]
+[gd_scene load_steps=21 format=3 uid="uid://dviwgv2ty8v6u"]
 
 [ext_resource type="Script" uid="uid://w2s7fcduh6lh" path="res://player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bsqovikudjr0q" path="res://charwalk.png" id="2"]
 [ext_resource type="FontFile" uid="uid://knb8u535cfkw" path="res://montserrat.otf" id="3"]
 [ext_resource type="Script" uid="uid://h1sr1twq1myg" path="res://player_controls.gd" id="4_k1vfr"]
 [ext_resource type="AudioStream" uid="uid://rnpdqn7e4scc" path="res://audio/videogame-death-sound-43894.mp3" id="5_sweqy"]
+[ext_resource type="AudioStream" uid="uid://dmvdbvrinvr6p" path="res://audio/character.mp3" id="6_2hs0m"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_1jxqw"]
+[ext_resource type="Texture2D" uid="uid://b6qgbwu01kccw" path="res://bomb_button.png" id="8_dw050"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 20.0
@@ -34,6 +37,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_sweqy")]
 }
 
 [sub_resource type="Animation" id="2"]
@@ -103,6 +118,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_sweqy")]
 }
 
 [sub_resource type="Animation" id="4"]
@@ -249,3 +276,26 @@ replication_config = SubResource("SceneReplicationConfig_w53uu")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_sweqy")
 volume_db = 5.0
+
+[node name="BombPlace" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2hs0m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Virtual Joystick" parent="CanvasLayer" instance=ExtResource("7_1jxqw")]
+offset_left = 53.0
+offset_top = -350.0
+offset_right = 353.0
+offset_bottom = -50.0
+joystick_mode = 1
+visibility_mode = 1
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(828, 399)
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_dw050")
+action = "set_bomb"

@@ -1,6 +1,8 @@
+CanvasModulate
+TouchScreenButton
+CanvasLayer
 Control
+AudioStreamPlayer2D
 PanelContainer
 Label
 ColorRect
-CanvasModulate
-AudioStreamPlayer2D
