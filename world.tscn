@@ -278,27 +278,52 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource("3")
 
-[node name="Winner" type="Label" parent="."]
+[node name="Winner" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1031.0
 offset_bottom = 617.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("4")
-text = "THE WINNER IS:
-YOU"
+
+[node name="ColorRect" type="ColorRect" parent="Winner"]
+layout_mode = 2
+offset_left = -67.0
+offset_top = -24.0
+offset_right = 964.0
+offset_bottom = 593.0
+scale = Vector2(1.12, 1.2)
+color = Color(0.066755, 0.066755, 0.066755, 0.560784)
 
 [node name="ExitGame" type="Button" parent="Winner"]
-layout_mode = 0
-offset_left = 384.0
-offset_top = 408.0
-offset_right = 649.0
-offset_bottom = 469.0
+layout_mode = 2
+offset_left = 469.0
+offset_top = 414.0
+offset_right = 569.0
+offset_bottom = 443.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("4")
 text = "EXIT GAME"
+
+[node name="Label" type="Label" parent="Winner"]
+layout_mode = 2
+offset_top = 274.0
+offset_right = 1031.0
+offset_bottom = 343.0
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 50
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinnerText" type="Label" parent="Winner"]
+layout_mode = 2
+offset_top = 340.0
+offset_right = 1031.0
+offset_bottom = 363.0
+text = "No one wins!"
+horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(512, 300)

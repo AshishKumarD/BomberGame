@@ -1,1 +1,6 @@
+Control
+PanelContainer
+Label
+ColorRect
+CanvasModulate
 AudioStreamPlayer2D

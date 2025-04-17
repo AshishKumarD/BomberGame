@@ -3,9 +3,13 @@ extends HBoxContainer
 var player_labels = {}
 var playing_players = []
 
+@onready var winner: Control = $"../Winner"
+@onready var winner_text: Label = $"../Winner/WinnerText"
+
+
 
 func _ready():
-	$"../Winner".hide()
+	winner.hide()
 	set_process(true)
 
 
@@ -19,8 +23,9 @@ func _process(_delta):
 				winner_score = player_labels[p].score
 				winner_name = player_labels[p].name
 
-		$"../Winner".set_text("THE WINNER IS:\n" + winner_name)
-		$"../Winner".show()
+		winner_text.set_text("THE WINNER IS:\n" + winner_name)
+		print("showing winners")
+		winner.show()
 		
 
 
@@ -61,22 +66,22 @@ func kill_player(id):
 
 	print("players", playing_players)
 
-	if playing_players.size() <= 1 && playing_players.size() >0:
+	if playing_players.size() <= 1:
 		print("true 3")
 		check_for_winner()
 
 
 
 func check_for_winner():
-	if playing_players.size() >= 1:
+	if playing_players.size() > 0:
 		var winner_id = playing_players[0]
 		if winner_id in player_labels:
 			var winner_name = player_labels[winner_id].name
-			$"../Winner".set_text("THE WINNER IS:\n" + winner_name)
-			$"../Winner".show()
+			winner_text.set_text("THE WINNER IS:\n" + winner_name)
+			winner.show()
 	elif playing_players.size() == 0:
-		$"../Winner".set_text("NO ONE WINS :(")
-		$"../Winner".show()
+		winner_text.set_text("NO ONE WINS :(")
+		winner.show()
 
 
 func _on_exit_game_pressed():
