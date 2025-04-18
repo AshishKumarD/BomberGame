@@ -1,8 +1,9 @@
 res://lobby.tscn
 res://tileset.tres
+res://player.gd
 res://bomb.tscn
 res://world.tscn
 res://rock.tscn
 res://tile_scene.tscn
 res://player.tscn
-res://player.gd
+res://addons/virtual_joystick/virtual_joystick_scene.tscn

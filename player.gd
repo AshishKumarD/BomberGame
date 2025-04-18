@@ -18,7 +18,11 @@ var current_anim = ""
 
 func _ready():
 	stunned = false
-	canvas_layer.show()
+	if DisplayServer.is_touchscreen_available():
+		canvas_layer.show()
+	else:
+		canvas_layer.hide()
+	
 	position = synced_position
 	if str(name).is_valid_int():
 		get_node("Inputs/InputsSync").set_multiplayer_authority(str(name).to_int())
