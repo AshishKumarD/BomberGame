@@ -5,6 +5,7 @@ const BOMB_RATE = 0.5
 
 @export
 var synced_position := Vector2()
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 @export
 var stunned = false
@@ -17,6 +18,7 @@ var current_anim = ""
 
 func _ready():
 	stunned = false
+	canvas_layer.show()
 	position = synced_position
 	if str(name).is_valid_int():
 		get_node("Inputs/InputsSync").set_multiplayer_authority(str(name).to_int())
@@ -77,4 +79,5 @@ func exploded(_by_who, vicitim):
 	stunned = true
 	get_node("anim").play("stunned")
 	print("going to die", vicitim)
+	canvas_layer.hide()
 	gamestate.kill_player(vicitim)
